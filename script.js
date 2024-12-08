@@ -14,7 +14,27 @@ const dragend = (e)=> {
     e.target.classList.remove('hold', 'hide')
 }
 
+const dragenter = (e)=> {
+    e.target.classList.add('hovered')   
+}
 
+const dragover = (e)=> {
+    e.preventDefault()  
+}
+const dragleave = (e)=> {
+    e.target.classList.remove('hovered') 
+}
+
+const drop = (e)=> {
+    e.target.append(dragdropItem)    
+    e.target.classList.remove('hovered') 
+}
 dragdropItem.addEventListener('dragstart', dragstart)
-
 dragdropItem.addEventListener('dragend', dragend)
+
+placeholders.forEach( (placeholder => {
+    placeholder.addEventListener('dragenter',dragenter)
+    placeholder.addEventListener('dragover',dragover)
+    placeholder.addEventListener('dragleave',dragleave)
+    placeholder.addEventListener('drop', drop)
+}) )
